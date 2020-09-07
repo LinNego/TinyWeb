@@ -9,6 +9,29 @@
 #include <exception>
 #include "paramater/paramater.h"
 #include <sys/socket.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
+#include <cmath>
+#include <ctime>
+#include <csignal>
+#include <csetjmp>
+
+#include <unistd.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <errno.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 const int kMAXEVENT = 65535;
 const int kMAXFD = 65535;
