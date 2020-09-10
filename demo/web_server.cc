@@ -104,6 +104,7 @@ void WebServer::EventLoop() {
         for(int i = 0; i < ready_number; ++i) {
             int sockfd = evlist_[i].data.fd;
             if(sockfd == listen_fd_) {
+               // printf("new connect\n");
                 AcceptClient(); 
             }
             else if(evlist_[i].events & (EPOLLRDHUP | EPOLLERR | EPOLLHUP)) {

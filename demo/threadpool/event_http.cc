@@ -25,13 +25,21 @@ void EventHttp::Initialize() {
     memset(&file_stat_, 0, sizeof(file_stat_));
     SetNonBlock(sockfd_);
     Register(epollfd_, sockfd_, EPOLLIN | EPOLLONESHOT | EPOLLHUP, 0);
+    have_error_ = true;
     num = 0;
 } 
 
 void EventHttp::CloseConnect() {
     UnRoll(epollfd_, sockfd_);
-    close(sockfd_);
-    close(in_fd);
+    int ret = close(sockfd_);
+    if(ret != 0) {
+        printf("cause %s\n", strerror(errno));
+    }
+        
+    ret = close(in_fd);
+    if(ret != 0) {
+        printf("case %s\n", strerror(errno));
+    }
 }
 
 /*主线程调用函数*/
@@ -80,9 +88,12 @@ EventHttp::LineState EventHttp::ReadLine() {
                 else if(buf_[check_index_ - 1] == '\t') {
                     line_ = buf_ + line_index_;
                     line_index_ = check_index_ + 1;
-                    buf_[check_index_] = buf_[check_index_ - 1] = 0;
+                    if(check_index_ != line_index_)
+                        buf_[check_index_] = buf_[check_index_ - 1] = 0;
+                    return COMPLETELINE;
                 }
-                return COMPLETELINE;
+                else 
+                    return COMPLETELINE;
         } 
         ++check_index_;
     }
@@ -99,6 +110,7 @@ EventHttp::HttpCode EventHttp::GetFile() {
         return Status403;
     }
     int fd = open(filepath_, O_RDONLY);
+    printf("fd%d\n", fd);
     if(fd < 0) {
         return Status404;
     }
@@ -131,8 +143,9 @@ EventHttp::GetUri() {
         strcat(filepath_, uri_);
     }
     else {
-        strcpy(filepath_, root_);
-        strcat(filepath_, uri_);
+        //strcpy(filepath_, root_);
+        //strcat(filepath_, uri_);
+        return Status400;
     }
     ret = GetFile();
     return ret;
@@ -162,13 +175,13 @@ EventHttp::PhaseRequest() {
     version_ = temp;
     ret = GetMethod();
     if(ret != Normal) {
-        printf("method error\n");
+        //printf("method error\n");
         return ret;
     }
 
     ret = GetUri();
     if(ret != Normal) {
-        printf("uri_ error\n");
+        //printf("uri_ error\n");
         return ret;
     }
     
@@ -255,6 +268,7 @@ EventHttp::HttpCode EventHttp::PhaseRead() {
 }
 
 bool EventHttp::Write() {
+    printf("sockfd %d\n", sockfd_);
     int ret;
     if(write_state_ < write_index_) {
         for(; ;) {
@@ -265,25 +279,28 @@ bool EventHttp::Write() {
                     return true;
                 }
                 else {
+                    printf("write\n");
                     CloseConnect();
                     return false;
                 }
             }
             write_state_ += ret;
             if(write_state_ >= write_index_) {
-                break;
+                if(have_error_) CloseConnect();
+                else break;
             }
         }
     }
     if(write_state_ >= write_index_) {
         for(; ;) {
-            ret = sendfile(sockfd_, in_fd, nullptr, 1024); 
+            ret = sendfile(sockfd_, in_fd, nullptr, 4096); 
             if(ret < 0) {
                 if(errno == EAGAIN || errno == EWOULDBLOCK) {
                     Register(epollfd_, sockfd_, EPOLLOUT | EPOLLONESHOT, 1);
                     return true;;
                 }
                 else {
+                    printf("errno %s\n", strerror(errno));
                     CloseConnect();
                     return false;
                 }
@@ -291,6 +308,7 @@ bool EventHttp::Write() {
             send_bytes_ += ret;
             if(send_bytes_ >= file_stat_.st_size) {
                 CloseConnect();
+                break;
             }
         }
     }
@@ -306,6 +324,9 @@ void EventHttp::Process() {
             WriteResponseLine("%s\r\n", kMessage[0]);
             WriteResponseLine("Content-type: text/html\r\n");
             WriteResponseLine("Content-length: %lld\r\n\r\n", file_stat_.st_size);
+            Register(epollfd_, sockfd_, EPOLLOUT | EPOLLONESHOT, 1);
+        }
+        else if(have_error_) {
             Register(epollfd_, sockfd_, EPOLLOUT | EPOLLONESHOT, 1);
         }
     }

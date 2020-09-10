@@ -107,6 +107,8 @@ private:
     int send_bytes_;
     struct stat file_stat_;
 
+    int have_error_;
+
 
     void SendSignal();               
     //当状态达到了ENDING，将该sockfd push进全局队列，然后发信号告知主线程，主线程从就绪的的队列中将他们送入阻塞队列
