@@ -1,0 +1,58 @@
+Date : 2020-09-13 08:59:14
+Directory : /home/ljc/Desktop/Retro
+Total : 25 files,  1897 codes, 135 comments, 305 blanks, all 2337 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         23 |      1,867 |        135 |        293 |      2,295 |
+| Makefile |          1 |         24 |          0 |          3 |         27 |
+| Markdown |          1 |          6 |          0 |          9 |         15 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                       |         25 |      1,897 |        135 |        305 |      2,337 |
+| config                                                  |          2 |         87 |         20 |         26 |        133 |
+| http                                                    |          2 |        665 |         36 |         84 |        785 |
+| log                                                     |          4 |        215 |          4 |         44 |        263 |
+| sql_pool                                                |          2 |        108 |         11 |         16 |        135 |
+| synchronous                                             |          4 |         61 |         18 |          7 |         86 |
+| threadpool                                              |          3 |        129 |          2 |         18 |        149 |
+| timer                                                   |          2 |        111 |          8 |         34 |        153 |
++---------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                | language | code       | comment    | blank      | total      |
++---------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/ljc/Desktop/Retro/Makefile                        | Makefile |         24 |          0 |          3 |         27 |
+| /home/ljc/Desktop/Retro/config/config.cc                | C++      |         65 |         10 |         11 |         86 |
+| /home/ljc/Desktop/Retro/config/config.h                 | C++      |         22 |         10 |         15 |         47 |
+| /home/ljc/Desktop/Retro/http/http_event.cc              | C++      |        526 |         36 |         74 |        636 |
+| /home/ljc/Desktop/Retro/http/http_event.h               | C++      |        139 |          0 |         10 |        149 |
+| /home/ljc/Desktop/Retro/log/block_queue.cc              | C++      |         47 |          0 |          8 |         55 |
+| /home/ljc/Desktop/Retro/log/block_queue.h               | C++      |         23 |          0 |         10 |         33 |
+| /home/ljc/Desktop/Retro/log/log.cc                      | C++      |         98 |          1 |         14 |        113 |
+| /home/ljc/Desktop/Retro/log/log.h                       | C++      |         47 |          3 |         12 |         62 |
+| /home/ljc/Desktop/Retro/main.cc                         | C++      |         24 |          0 |          4 |         28 |
+| /home/ljc/Desktop/Retro/sql_pool/sql_connection_pool.cc | C++      |         68 |          0 |         12 |         80 |
+| /home/ljc/Desktop/Retro/sql_pool/sql_connection_pool.h  | C++      |         40 |         11 |          4 |         55 |
+| /home/ljc/Desktop/Retro/synchronous.cc                  | C++      |         59 |          5 |         14 |         78 |
+| /home/ljc/Desktop/Retro/synchronous.h                   | C++      |          6 |          0 |          0 |          6 |
+| /home/ljc/Desktop/Retro/synchronous/condition_varible.h | C++      |         17 |          1 |          3 |         21 |
+| /home/ljc/Desktop/Retro/synchronous/mutex.h             | C++      |         17 |         14 |          1 |         32 |
+| /home/ljc/Desktop/Retro/synchronous/mutex_lock.h        | C++      |         11 |          3 |          2 |         16 |
+| /home/ljc/Desktop/Retro/synchronous/sem.h               | C++      |         16 |          0 |          1 |         17 |
+| /home/ljc/Desktop/Retro/threadpool/README.md            | Markdown |          6 |          0 |          9 |         15 |
+| /home/ljc/Desktop/Retro/threadpool/threadpool.cc        | C++      |         93 |          0 |          4 |         97 |
+| /home/ljc/Desktop/Retro/threadpool/threadpool.h         | C++      |         30 |          2 |          5 |         37 |
+| /home/ljc/Desktop/Retro/timer/timer.cc                  | C++      |         55 |          1 |         12 |         68 |
+| /home/ljc/Desktop/Retro/timer/timer.h                   | C++      |         56 |          7 |         22 |         85 |
+| /home/ljc/Desktop/Retro/web_server.cc                   | C++      |        343 |         30 |         43 |        416 |
+| /home/ljc/Desktop/Retro/web_server.h                    | C++      |         65 |          1 |         12 |         78 |
+| Total                                                   |          |      1,897 |        135 |        305 |      2,337 |
++---------------------------------------------------------+----------+------------+------------+------------+------------+
