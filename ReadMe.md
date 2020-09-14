@@ -1,7 +1,9 @@
-# TinyWeb
+# TinyWebServer
 
-TinyWeb采用Proactor模式来设计的一个小型的Web服务器，服务器是基于事件驱动，并且预线程化。使用epoll进行监听，采用C++语言编写，在linux平台下运行，封装了linux下的一些线程同步的类型，诸如mutex，condition_varible，和sem。主线程只负责接受I/O，工作线程负责处理逻辑。目前只完成了GET方法，并且请求只有一个页面。
+一个运行在linux平台下的基于非阻塞I/O和事件驱动的轻量级Web服务器。
 
-**2020.9.7**
+1. 使用预线程化+非阻塞I/O+epoll(ET模式和LT模式) + 事件处理(同步I/O模拟的Procator和Reactor模式)
+2. 支持解析GET和POST请求
+3. 访问服务器数据库达到注册和登陆的功能
+4. 实现同步/异步的日志系统
 
-第一次提交的是一个小demo。
