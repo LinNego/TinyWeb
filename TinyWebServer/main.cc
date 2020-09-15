@@ -10,11 +10,12 @@ int main(int argc, char *argv[]) {
     string databasename = "TinyWebServer";
      
     Config config;
-    config.parse_arg(argc, argv);
+    config.ParseArg(argc, argv);
+    if(config.help_) exit(0);
 
     WebServer server;
-    server.Init(config.PORT, user, passwd, databasename, config.LOGWrite, config.OPT_LINGER, 
-                    config.TRIGMode, config.sql_num, config.thread_num, config.close_log, config.actor_model);
+    server.Init(config.port_, user, passwd, databasename, config.logwrite_, config.opt_linger_, 
+                    config.trigmode_, config.sql_num_, config.thread_num_, config.close_log_, config.actor_model_);
     
     
     server.LogWrite();
