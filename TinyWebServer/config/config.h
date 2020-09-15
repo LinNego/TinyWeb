@@ -3,44 +3,48 @@
 
 #include <unistd.h>
 #include <cstdlib>
+#include <cstdio>
 
-class Config
-{
+class Config {
 public:
     Config();
-    ~Config(){};
 
-    void parse_arg(int argc, char*argv[]);
+    void ParseArg(int argc, char*argv[]);
+    void PrintHelp();
 
     //端口号
-    int PORT;
+    int port_;
 
     //日志写入方式
-    int LOGWrite;
+    int logwrite_;
 
     //触发组合模式
-    int TRIGMode;
+    int trigmode_;
 
     //listenfd触发模式
-    int LISTENTrigmode;
+    int listentrigmode_;
 
     //connfd触发模式
-    int CONNTrigmode;
+    int conntrigmode_;
 
     //优雅关闭链接
-    int OPT_LINGER;
+    int opt_linger_;
 
     //数据库连接池数量
-    int sql_num;
+    int sql_num_;
 
     //线程池内的线程数量
-    int thread_num;
+    int thread_num_;
 
     //是否关闭日志
-    int close_log;
+    int close_log_;
 
     //并发模型选择
-    int actor_model;
+    int actor_model_;
+
+    //print help
+    bool help_;
+
 };
 
 #endif
